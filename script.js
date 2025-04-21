@@ -1,3 +1,6 @@
+socket.onopen = () => console.log("WebSocket connected!");
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     // 🔹 必要な要素を取得
     const chatBox = document.getElementById('chat-box');
