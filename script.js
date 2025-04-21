@@ -39,6 +39,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return JSON.parse(localStorage.getItem(`chat-${roomId}`)) || [];
     }
 
+    let socket; // ✅ ここでグローバル変数として宣言
+
+function initializeWebSocket() {
+    socket = new WebSocket('wss://i-chat.vercel.app'); // ✅ 重複を防ぐ
+    socket.onopen = () => console.log("WebSocket connected!");
+}
+
     function displayMessage(username, content, time, isImage = false, index) {
         const messageContainer = document.createElement('div');
         messageContainer.classList.add('message-container');
