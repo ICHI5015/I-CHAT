@@ -1,4 +1,4 @@
-socket.onopen = () => console.log("WebSocket connected!");
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -152,6 +152,7 @@ function initializeWebSocket() {
         }
     });
 
+    socket.onopen = () => console.log("WebSocket connected!");
     closeNameChange.addEventListener('click', () => nameChangeModal.style.display = "none");
 
     roomIdButton.addEventListener('click', () => roomIdModal.style.display = "block");
