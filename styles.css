@@ -1,0 +1,422 @@
+/* ===== 全体のスタイル ===== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* ===== メニューバー ===== */
+
+
+
+/* 🔹 ボタンの配置調整 */
+#menu-buttons {
+    display: flex;
+    gap: 12px;
+    margin-left: 10px;
+}
+
+
+
+/* 🔹 ルームID変更モーダル */
+#room-id-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+    text-align: center;
+}
+
+/* 🔹 入力エリア */
+#room-id-input {
+    width: 93%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 🔹 ボタン配置 */
+#submit-room-id, #close-room-id {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #64b5f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit-room-id:hover, #close-room-id:hover {
+    background-color: #1e88e5;
+}
+
+
+
+
+/* 🔹 名前変更モーダル */
+#name-change-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+    text-align: center;
+}
+
+
+
+.modal-content button:hover {
+    background-color: #1e88e5;
+}
+
+#name-change-button:hover,
+#room-id-button:hover,
+#login-button:hover {
+    background-color: #1e88e5;
+}
+
+/* 🔹 削除モードボタン */
+#delete-mode-button {
+    height: 40px;
+    border-radius: 12px;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: auto; /* 🔹 メニューバー内の右端に配置 */
+}
+
+#delete-mode-button:hover {
+    background-color: darkred;
+}
+
+/* ===== モーダル ===== */
+#room-id-modal, #login-modal, #name-change-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: none;
+    text-align: center;
+}
+
+/* 🔹 入力エリアのデザイン */
+#new-username, .modal-content input {
+    width: 93%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 🔹 ボタンの配置 */
+#submit-name-change, #close-name-change, .modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #64b5f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit-name-change:hover, #close-name-change:hover, .modal-content button:hover {
+    background-color: #1e88e5;
+}
+
+/* ===== チャットボックス ===== */
+#chat-container {
+    width: 90%;
+    max-width: 400px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 60px;
+}
+
+#chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== 入力エリア ===== */
+#input-area {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: 10px;
+}
+
+#message-input {
+    width: 93%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+/* ===== 送信ボタン ===== */
+#send-button, #image-button {
+    width: 70px;
+    height: 40px;
+    background-color: #64b5f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#send-button:hover, #image-button:hover {
+    background-color: #42a5f5;
+}
+
+/* ===== 吹き出し（メッセージ） ===== */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    padding: 8px;
+    background-color: #a7d2f6;
+    border-radius: 20px;
+    position: relative;
+    max-width: 50%;
+    min-width: 10px;
+    position: relative;
+    
+    left: 150px;
+}
+
+.message {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 15px;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: right;
+}
+
+.message-container::after {
+    content: "";
+    position: absolute;
+    bottom: 15px;
+    right: -10px;
+    border-left: 10px solid #a7d2f6;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+/* 🔹 メタ情報 */
+.meta-info {
+    font-size: 12px;
+    color: gray;
+    margin-top: 5px;
+    text-align: right;
+    position: relative;
+}
+
+/* 🔹 画像表示 */
+.uploaded-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+#menu-buttons {
+    display: flex; /* ✅ 横並びにする */
+    gap: 12px; /* ✅ ボタン間の間隔 */
+    margin-left: 10px;
+}
+
+#room-id-button {
+    background-color: #64b5f6;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#room-id-button:hover {
+    background-color: #1e88e5;
+}
+#menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #90caf9;
+    display: flex;
+    justify-content: flex-end; /* ✅ ボタンを右側に配置 */
+    align-items: center;
+    padding-right: 20px; /* ✅ 右端の余白を追加 */
+    
+}
+
+
+#app-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    margin-left: 20px; /* ✅ 左端から少し余白を確保 */
+    font-family: 'Arial', sans-serif;
+    flex-shrink: 0; /* ✅ 縮小を防ぐ */
+    z-index: 1000;
+    text-align: center; /* ✅ テキストを中央揃え */
+    position: relative;
+    top: 20px;
+    right: 600px;
+}
+
+#menu-buttons {
+    display: flex;
+    gap: 15px; /* ✅ ボタン間の適度な間隔 */
+    
+}
+
+#name-change-button, #room-id-button, #delete-mode-button {
+    background-color: #64b5f6;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#name-change-button:hover, #room-id-button:hover, #delete-mode-button:hover {
+    background-color: #1e88e5;
+}
+
+/* 🔹 削除ボタンの色を白に変更 */
+.delete-button {
+    background-color: white; /* ✅ 背景を白に変更 */
+    color: black; /* ✅ テキストを黒にする */
+    border: 1px solid #ccc; /* ✅ 境界線を追加 */
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: none; /* ✅ 初期状態では非表示 */
+
+
+}
+
+.delete-button:hover {
+    background-color: #f1f1f1; /* ✅ ホバー時にわずかに暗くする */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #64b5f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #1e88e5;
+}
+
+
+#delete-mode-button {
+    margin-right: 20px; /* ✅ 「メッセージ削除」ボタンの右側に余白を追加 */
+}
+
+#room-id-display {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px; /* 🔹 入力欄との間隔を確保 */
+}
+
+/* 送信メッセージ（右側に表示） */
+.sent-message {
+    position: relative;
+    left: 150px; /* ✅ 右に寄せる */
+    background-color: #a7d2f6;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+/* 受信メッセージ（左側に表示） */
+.received-message {
+    position: relative;
+    right: 150px; /* ✅ 左に寄せる */
+    background-color: #d3d3d3;
+    padding: 8px;
+    border-radius: 10px;
+}
+#room-id-display {
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+    z-index: 10000;
+}
+

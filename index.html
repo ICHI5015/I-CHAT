@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャットアプリ</title>
+
+    <div id="app-name">I CHAT</div> <!-- 🔹 右側にアプリ名追加 -->
+
+    <div id="room-id-display">ルームID: <span id="room-id-text">未設定</span></div>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  
+
+    <!-- ===== メニューバー ===== -->
+    <div id="menu-bar">
+        <div id="menu-buttons">
+            <button id="name-change-button">名前変更</button>
+            <button id="room-id-button">ルーム入室</button>
+            <button id="delete-mode-button">メッセージ削除</button>
+        </div>
+    </div>
+
+    <!-- ===== 名前変更モーダル ===== -->
+    <div id="name-change-modal" class="modal">
+        <div class="modal-content">
+            <h3>名前を変更</h3>
+            <input type="text" id="new-username" placeholder="新しい名前を入力">
+            <button id="submit-name-change">変更</button>
+            <button id="close-name-change">キャンセル</button>
+        </div>
+    </div>
+
+    <!-- ===== ルームID変更モーダル ===== -->
+    <div id="room-id-modal" class="modal">
+        <div class="modal-content">
+            <h3>ルームIDを入力</h3>
+            <input type="text" id="room-id-input" placeholder="ルームIDを入力">
+            <button id="submit-room-id">入室</button>
+            <button id="close-room-id">閉じる</button>
+        </div>
+    </div>
+
+    <!-- ===== チャットエリア ===== -->
+    <div id="chat-container">
+        <div id="chat-box"></div>
+
+        <div id="input-area">
+            <input type="text" id="message-input" placeholder="メッセージを入力">
+            <button id="send-button">送信</button>
+            <button id="image-button">📷</button>
+            <input type="file" id="image-input" style="display: none">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
