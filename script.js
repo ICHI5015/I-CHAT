@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadMessages();
 });
 
-const socket = new WebSocket('https://i-chat-five.vercel.app/'); // ✅ WebSocket接続
+const socket = new WebSocket('wss://your-vercel-app.vercel.app'); // ✅ WebSocket接続
 
 socket.onmessage = event => {
     const data = JSON.parse(event.data);
@@ -185,56 +185,3 @@ document.getElementById('send-button').addEventListener('click', () => {
         messageInput.value = "";
     }
 });
-const WebSocket = require('ws');
-const server = new WebSocket.Server({ port: process.env.PORT || 8080 });
-
-let messages = []; // ✅ 全ユーザー共通のメッセージ履歴を保存
-
-server.on('connection', ws => {
-    ws.send(JSON.stringify({ type: "syncMessages", messages })); // ✅ 接続時に最新メッセージを送る
-
-    ws.on('message', message => {
-        const data = JSON.parse(message);
-
-        if (data.type === "message") {
-            messages.push({ username: data.username, text: data.text, time: data.time });
-
-            server.clients.forEach(client => {
-                if (client.readyState === WebSocket.OPEN) {
-                    client.send(JSON.stringify({ type: "message", username: data.username, text: data.text, time: data.time }));
-                }
-            });
-        }
-    });
-});
-
-console.log("WebSocket server running...");
-const socket = new WebSocket('https://i-chat-five.vercel.app/'); // ✅ WebSocket接続
-
-socket.onopen = () => {
-    console.log("WebSocket connected!");
-};
-
-socket.onmessage = event => {
-    const data = JSON.parse(event.data);
-
-    if (data.type === "syncMessages") {
-        // ✅ 初回接続時に全メッセージを同期
-        chatBox.innerHTML = "";
-        data.messages.forEach(msg => displayMessage(msg.username, msg.text, msg.time));
-    }
-
-    if (data.type === "message") {
-        displayMessage(data.username, data.text, data.time); // ✅ 他のデバイスからのメッセージを即時反映
-    }
-};
-
-sendButton.addEventListener('click', () => {
-    const messageText = messageInput.value.trim();
-    if (messageText) {
-        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        socket.send(JSON.stringify({ type: "message", username: currentUser, text: messageText, time: currentTime }));
-        messageInput.value = "";
-    }
-});
-
