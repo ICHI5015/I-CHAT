@@ -185,7 +185,7 @@ document.getElementById('send-button').addEventListener('click', () => {
         messageInput.value = "";
     }
 });
-const socket = new WebSocket('wss://i-chat.vercel.app'); // ✅ VercelのURLに変更
+
 
 socket.onopen = () => {
     console.log("WebSocket connected!");
