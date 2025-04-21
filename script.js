@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadMessages();
 });
 
-const socket = new WebSocket('wss://your-vercel-app.vercel.app'); // ✅ WebSocket接続
+const socket = new WebSocket('https://i-chat-five.vercel.app/'); // ✅ WebSocket接続
 
 socket.onmessage = event => {
     const data = JSON.parse(event.data);
