@@ -255,3 +255,31 @@ server.on('connection', ws => {
 });
 
 console.log("WebSocket server running...");
+const WebSocket = require('ws');
+const server = new WebSocket.Server({ port: process.env.PORT || 8080 });
+
+let messages = []; // ✅ メッセージ履歴を保存
+
+server.on('connection', ws => {
+    ws.on('message', message => {
+        const data = JSON.parse(message);
+        console.log("受信したメッセージ:", data); // ✅ ログ追加
+
+        if (data.type === "message") {
+            messages.push({ username: data.username, text: data.text, time: data.time });
+
+            // 🔹 メッセージを全クライアントに送信
+            server.clients.forEach(client => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify({ type: "message", username: data.username, text: data.text, time: data.time }));
+                }
+            });
+        }
+    });
+
+    // ✅ 新規接続時に過去メッセージを送信
+    ws.send(JSON.stringify({ type: "syncMessages", messages }));
+});
+
+console.log("WebSocket server running...");
+
