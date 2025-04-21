@@ -185,3 +185,73 @@ document.getElementById('send-button').addEventListener('click', () => {
         messageInput.value = "";
     }
 });
+const socket = new WebSocket('wss://i-chat.vercel.app'); // ✅ VercelのURLに変更
+
+socket.onopen = () => {
+    console.log("WebSocket connected!");
+};
+
+socket.onmessage = event => {
+    const data = JSON.parse(event.data);
+    console.log("受信したデータ:", data); // ✅ ログ追加
+
+    if (data.type === "message") {
+        displayMessage(data.username, data.text, data.time); // ✅ メッセージを表示
+    }
+
+    if (data.type === "syncMessages") {
+        chatBox.innerHTML = "";
+        data.messages.forEach(msg => displayMessage(msg.username, msg.text, msg.time));
+    }
+};
+
+function displayMessage(username, content, time) {
+    const messageContainer = document.createElement('div');
+    messageContainer.classList.add('message-container');
+    messageContainer.innerHTML = `<strong>${username}:</strong> ${content} <span class="meta-info">${time}</span>`;
+    chatBox.appendChild(messageContainer);
+    scrollToBottom();
+}
+
+function scrollToBottom() {
+    setTimeout(() => chatBox.scrollTop = chatBox.scrollHeight, 100);
+}
+
+sendButton.addEventListener('click', () => {
+    const messageText = messageInput.value.trim();
+    if (messageText) {
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const messageData = { type: "message", username: currentUser, text: messageText, time: currentTime };
+
+        console.log("送信するデータ:", messageData); // ✅ ログ追加
+        socket.send(JSON.stringify(messageData)); // ✅ メッセージを送信
+
+        messageInput.value = "";
+    }
+});
+const WebSocket = require('ws');
+const server = new WebSocket.Server({ port: process.env.PORT || 8080 });
+
+let messages = []; // ✅ メッセージ履歴を保存
+
+server.on('connection', ws => {
+    ws.on('message', message => {
+        const data = JSON.parse(message);
+        console.log("受信したメッセージ:", data); // ✅ ログ追加
+
+        if (data.type === "message") {
+            messages.push({ username: data.username, text: data.text, time: data.time });
+
+            // 🔹 メッセージを全クライアントに送信
+            server.clients.forEach(client => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify({ type: "message", username: data.username, text: data.text, time: data.time }));
+                }
+            });
+        }
+    });
+
+    ws.send(JSON.stringify({ type: "syncMessages", messages })); // ✅ 接続時に最新メッセージを送る
+});
+
+console.log("WebSocket server running...");
