@@ -1,4 +1,4 @@
-const WebSocket = require('ws');
+const WebSocket = require('ws'); // ✅ Node.js の `require` を正しく使う！
 const server = new WebSocket.Server({ port: process.env.PORT || 8080 });
 
 server.on('connection', ws => {
@@ -9,10 +9,11 @@ server.on('connection', ws => {
 
         server.clients.forEach(client => {
             if (client.readyState === WebSocket.OPEN) {
-                client.send(message); // 🔹 すべての接続にメッセージを送信
+                client.send(message);
             }
         });
     });
 });
+
 
 console.log("🚀 WebSocketサーバーが起動しました！");
