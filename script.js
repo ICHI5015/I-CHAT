@@ -218,3 +218,4 @@ sendButton.addEventListener("click", () => {
         messageInput.value = "";
     }
 });
+socket.onopen = () => console.log("WebSocket connected!");
