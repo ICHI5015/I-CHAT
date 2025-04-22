@@ -231,3 +231,4 @@ server.on('connection', ws => {
         });
     });
 });
+const socket = new WebSocket('wss://i-chat-five.vercel.app'); // ✅ VercelのURLを正しく設定！
