@@ -38,9 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.setItem(`chat-${roomId}`, JSON.stringify(messages));
     }
 
-    function loadMessagesLocally() {
-        return JSON.parse(localStorage.getItem(`chat-${roomId}`)) || [];
-    }
+   localStorage
 
     let socket; // ✅ ここでグローバル変数として宣言
 
@@ -196,3 +194,11 @@ document.getElementById('send-button').addEventListener('click', () => {
         messageInput.value = "";
     }
 });
+socket.onmessage = event => {
+    const data = JSON.parse(event.data);
+
+    if (data.type === "message") {
+        displayMessage(data.username, data.text, data.time); // ✅ WebSocket経由のメッセージを表示！
+    }
+};
+
