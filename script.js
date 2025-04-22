@@ -185,3 +185,23 @@ document.getElementById('send-button').addEventListener('click', () => {
         messageInput.value = "";
     }
 });
+sendButton.addEventListener("click", () => {
+    const messageText = messageInput.value.trim();
+    if (messageText) {
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const messageData = { type: "message", username: currentUser, text: messageText, time: currentTime };
+
+        socket.send(JSON.stringify(messageData)); // ✅ WebSocketで送信！
+        messageInput.value = "";
+    }
+});
+sendButton.addEventListener("click", () => {
+    const messageText = messageInput.value.trim();
+    if (messageText) {
+        const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const messageData = { type: "message", username: currentUser, text: messageText, time: currentTime };
+
+        socket.send(JSON.stringify(messageData)); // ✅ WebSocketで送信！
+        messageInput.value = "";
+    }
+});
