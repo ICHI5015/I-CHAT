@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const sendButton = document.getElementById('send-button'); // ✅ ここで取得！
+    
+    if (!sendButton) {
+        console.error("sendButtonが見つかりません！HTMLのIDを確認してください"); // 🔥 デバッグ用
+        return;
+    }
+
+    sendButton.addEventListener('click', () => {
+        console.log("送信ボタンがクリックされました！"); // ✅ クリックイベント確認
+    });
+});
+
     // 🔹 必要な要素を取得
     document.getElementById("send-button")
     const chatBox = document.getElementById('chat-box');
