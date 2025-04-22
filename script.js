@@ -219,16 +219,6 @@ sendButton.addEventListener("click", () => {
     }
 });
 socket.onopen = () => console.log("WebSocket connected!");
-server.on('connection', ws => {
-    console.log("✅ WebSocketサーバーに新しい接続がありました！");
+const socket = new WebSocket('wss://i-chat-five.vercel.app'); // ✅ WebSocketに接続！
 
-    ws.on('message', message => {
-        console.log("📩 受信したメッセージ:", message); // ✅ メッセージログを追加
-        server.clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(message);
-            }
-        });
-    });
-});
 const socket = new WebSocket('wss://i-chat-five.vercel.app'); // ✅ VercelのURLを正しく設定！
