@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // 🔹 必要な要素を取得
+    document.getElementById("send-button")
     const chatBox = document.getElementById('chat-box');
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
@@ -164,7 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadMessages();
 });
 
-const socket = new WebSocket('wss://your-vercel-app.vercel.app'); // ✅ WebSocket接続
+const socket = new WebSocket('https://i-chat-five.vercel.app/'); // ✅ WebSocket接続
 
 socket.onmessage = event => {
     const data = JSON.parse(event.data);
