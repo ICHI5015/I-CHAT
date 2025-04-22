@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 🔹 初回のメッセージ読み込み
     roomIdText.textContent = roomId;
     loadMessages();
-});
+
 
 const socket = new WebSocket('https://i-chat-five.vercel.app/'); // ✅ WebSocket接続
 
