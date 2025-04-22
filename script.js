@@ -1,6 +1,3 @@
-
-
-
 document.addEventListener('DOMContentLoaded', async () => {
     // 🔹 必要な要素を取得
     const chatBox = document.getElementById('chat-box');
@@ -38,14 +35,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.setItem(`chat-${roomId}`, JSON.stringify(messages));
     }
 
-   localStorage
-
-    let socket; // ✅ ここでグローバル変数として宣言
-
-function initializeWebSocket() {
-    socket = new WebSocket('wss://i-chat.vercel.app'); // ✅ 重複を防ぐ
-    socket.onopen = () => console.log("WebSocket connected!");
-}
+    function loadMessagesLocally() {
+        return JSON.parse(localStorage.getItem(`chat-${roomId}`)) || [];
+    }
 
     function displayMessage(username, content, time, isImage = false, index) {
         const messageContainer = document.createElement('div');
@@ -150,7 +142,6 @@ function initializeWebSocket() {
         }
     });
 
-    socket.onopen = () => console.log("WebSocket connected!");
     closeNameChange.addEventListener('click', () => nameChangeModal.style.display = "none");
 
     roomIdButton.addEventListener('click', () => roomIdModal.style.display = "block");
@@ -194,11 +185,3 @@ document.getElementById('send-button').addEventListener('click', () => {
         messageInput.value = "";
     }
 });
-socket.onmessage = event => {
-    const data = JSON.parse(event.data);
-
-    if (data.type === "message") {
-        displayMessage(data.username, data.text, data.time); // ✅ WebSocket経由のメッセージを表示！
-    }
-};
-
