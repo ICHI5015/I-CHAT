@@ -1,12 +1,15 @@
 <?php
-// サーバーに簡単なレスポンスを返す
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // POSTリクエストを処理
+    $data = json_decode(file_get_contents("php://input"), true);
+    echo json_encode(["message" => "POSTリクエスト成功！", "data" => $data]);
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    // GETリクエストを処理
     echo json_encode(["message" => "GETリクエスト成功！"]);
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $body = file_get_contents("php://input");
-    echo json_encode(["message" => "POSTリクエスト成功！", "data" => json_decode($body)]);
 } else {
-    http_response_code(405); // メソッド許可されず
-    echo json_encode(["error" => "許可されていないメソッド"]);
+    http_response_code(405);
+    echo json_encode(["error" => "このメソッドは許可されていません"]);
 }
 ?>
